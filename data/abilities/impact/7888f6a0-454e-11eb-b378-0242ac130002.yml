@@ -1,0 +1,25 @@
+---
+
+- id: 7888f6a0-454e-11eb-b378-0242ac130002
+  name: BACnet Atomic Write File
+  description: |
+    The AtomicWriteFile Service is used by a client BACnet-user to perform an open-write-close operation of an OCTET STRING into a specified position or a list of OCTET STRINGs into a specified group of records in a file.
+  tactic: impact
+  technique:
+    attack_id: T0831
+    name: Manipulation of Control
+  platforms:
+    linux:
+      sh:
+        timeout: 360
+        command: |
+          ./bacawf #{bacnet.device.instance} #{bacnet.file.instance} #{bacnet.write.local_name} #{bacnet.write.octet_offset}
+        payloads:
+          - bacawf
+    windows:
+      psh, cmd:
+        timeout: 360
+        command: |
+          .\bacawf.exe #{bacnet.device.instance} #{bacnet.file.instance} #{bacnet.write.local_name} #{bacnet.write.octet_offset}
+        payloads:
+          - bacawf.exe

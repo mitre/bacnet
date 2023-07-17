@@ -1,0 +1,25 @@
+---
+
+- id: 73a8f024-656d-11eb-ae93-0242ac130002
+  name: BACnet Atomic Read File
+  description: |
+    The AtomicReadFile Service is used by a client BACnet-user to perform an open-read-close operation on the contents of the specified file. The file is saved locally.
+  tactic: collection
+  technique:
+    attack_id: T0801
+    name: Monitor Process State
+  platforms:
+    linux:
+      sh:
+        timeout: 360
+        command: |
+          ./bacarf #{bacnet.device.instance} #{bacnet.file.instance} #{bacnet.read.local_name}
+        payloads:
+          - bacarf
+    windows:
+      psh, cmd:
+        timeout: 360
+        command: |
+          .\bacarf.exe #{bacnet.device.instance} #{bacnet.file.instance} #{bacnet.read.local_name}
+        payloads:
+          - bacarf.exe

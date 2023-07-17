@@ -1,0 +1,53 @@
+---
+
+id: 17f06fa2-44e1-11eb-b378-0242ac130002
+name: BACnet Payloads
+standard_payloads:
+
+# WhoIs
+  bacwi:
+    description: BACnet WhoIs - Linux
+    id: f9b2de51-e37c-49e0-85c2-ce53fdd32108
+  bacwi.exe:
+    description: BACnet WhoIs - Windows
+    id: 6292179e-656c-11eb-ae93-0242ac130002
+
+# EPICS
+  bacepics:
+    description: BACnet EPICS  - Linux
+    id: 6aa5ae6a-44e1-11eb-b378-0242ac130002
+  bacepics.exe:
+    description: BACnet EPICS - Windows
+    id: 6ecaedd8-656c-11eb-ae93-0242ac130002
+
+# WriteProp
+  bacwp:
+    description: BACnet WriteProperty Service - Linux
+    id: 1a2faf5a-4601-11eb-b378-0242ac130002
+  bacwp.exe:
+    description: BACnet WriteProperty Service - Windows
+    id: 82b101d4-656c-11eb-ae93-0242ac130002
+
+# ReadProp
+  bacrp:
+    description: BACnet ReadProperty Service - Linux
+    id: 748d5c80-5679-11eb-ae93-0242ac130002
+  bacrp.exe:
+    description: BACnet ReadProperty Service - Windows
+    id: 8e0de18c-656c-11eb-ae93-0242ac130002
+
+# AtomicWriteFile
+  bacawf:
+    description: BACnet AtomicWriteFile - Linux
+    id: 7888f6a0-454e-11eb-b378-0242ac130002
+  bacawf.exe:
+    description: BACnet AtomicWriteFile - Windows
+    id: 73eba4e2-656c-11eb-ae93-0242ac130002
+
+# AtomicReadFile
+  bacarf:
+    description: BACnet AtomicReadFile - Linux
+    id: e2e4d612-656b-11eb-ae93-0242ac130002
+  bacarf.exe:
+    description: BACnet AtomicReadFile - Windows
+    id: 938f09a6-656c-11eb-ae93-0242ac130002

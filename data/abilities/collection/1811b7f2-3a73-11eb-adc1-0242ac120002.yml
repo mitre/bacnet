@@ -1,0 +1,26 @@
+---
+
+- id: 1811b7f2-3a73-11eb-adc1-0242ac120002
+  name: BACnet EPICS Report
+  description: |
+    Generates an EPICS report - which provides services supported, the object list, and properties of those objects.
+  tactic: collection
+  technique:
+    attack_id: T0802
+    name: Automated Collection
+  repeatable: True
+  platforms:
+    linux:
+      sh:
+        timeout: 360
+        command: |
+          ./bacepics #{bacnet.device.instance}
+        payloads:
+          - bacepics
+    windows:
+      psh, cmd:
+        timeout: 360
+        command: |
+          .\bacepics.exe #{bacnet.device.instance}
+        payloads:
+          - bacepics.exe

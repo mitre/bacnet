@@ -1,0 +1,26 @@
+---
+
+- id: b93bd80e-3a70-11eb-adc1-0242ac120002
+  name: BACnet Who-Is
+  description: |
+    The Who-Is service is used by a sending BACnet-user to determine the Device object identifier, the network address, or both, of other BACnet devices that share the same internetwork.
+  tactic: discovery
+  technique:
+    attack_id: T0846
+    name: Remote System Discovery
+  repeatable: True
+  platforms:
+    linux:
+      sh:
+        timeout: 360
+        command: |
+          ./bacwi
+        payloads:
+          - bacwi
+    windows:
+      psh, cmd:
+        timeout: 360
+        command: |
+          .\bacwi.exe
+        payloads:
+          - bacwi.exe

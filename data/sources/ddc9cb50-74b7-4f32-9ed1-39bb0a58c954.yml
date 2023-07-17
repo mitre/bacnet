@@ -1,0 +1,19 @@
+---
+
+id: ddc9cb50-74b7-4f32-9ed1-39bb0a58c954
+name: BACnet Sample Facts
+facts:
+# EPICS
+- trait: bacnet.device.instance
+  value: 100101
+# Read Property
+- trait: bacnet.obj.type
+  value: 8
+- trait: bacnet.obj.instance
+  value: 100101
+- trait: bacnet.obj.property
+  value: 76
+- trait: bacnet.read.index
+  value: -2
+relationships: []
+rules: []

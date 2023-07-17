@@ -1,0 +1,26 @@
+---
+
+- id: 47432648-5678-11eb-ae93-0242ac130002
+  name: BACnet Read Property
+  description: |
+    The ReadProperty service is used by a client BACnet-user to request the value of one property of one BACnet Object.
+  tactic: collection
+  technique:
+    attack_id: T0861
+    name: Point & Tag Identification
+  repeatable: True
+  platforms:
+    linux:
+      sh:
+        timeout: 360
+        command: |
+          ./bacrp #{bacnet.device.instance} #{bacnet.obj.type} #{bacnet.obj.instance} #{bacnet.obj.property} #{bacnet.read.index}
+        payloads:
+          - bacrp
+    windows:
+      psh, cmd:
+        timeout: 360
+        command: |
+          .\bacrp.exe #{bacnet.device.instance} #{bacnet.obj.type} #{bacnet.obj.instance} #{bacnet.obj.property} #{bacnet.read.index}
+        payloads:
+          - bacrp.exe
