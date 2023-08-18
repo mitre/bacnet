@@ -1,6 +1,6 @@
 # BACnet Plugin Code
 
-Where possible, the CALDERA for OT plugins leverage open-source libraries and payloads, unifying their exposure through the Caldera Adversary Emulation framework.
+Where possible, the Caldera for OT plugins leverage open-source libraries and payloads, unifying their exposure through the Caldera Adversary Emulation framework.
 
 * The BACnet plugin leverages the open-source protocol stack [BACnet Stack](https://github.com/bacnet-stack/bacnet-stack/tree/bacnet-stack-1.0) - version 1.0.
 

@@ -3,7 +3,7 @@ from plugins.bacnet.app.bacnet_gui import BacnetGUI
 from plugins.bacnet.app.bacnet_api import BacnetAPI
 
 name = 'BACnet'
-description = 'The BACnet plugin for CALDERA provides adversary emulation abilities specific to the BACnet control systems protocol.'
+description = 'The BACnet plugin for Caldera provides adversary emulation abilities specific to the BACnet control systems protocol.'
 address = '/plugin/bacnet/gui'
 access = BaseWorld.Access.RED
 

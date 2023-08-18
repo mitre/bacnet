@@ -14,7 +14,7 @@ The following table outlines MITRE ATT&CK for ICS Tactic coverage provided by th
 |                         | Point & Tag Identification |                         |
 
 ### Compatibility
-The plugin's payloads currently support deployment to CALDERA Agents of the following computer architectures:
+The plugin's payloads currently support deployment to Caldera Agents of the following computer architectures:
 |        | Windows | Linux | Macintosh |
 | -----: | :-----: | :---: | :-------: |
 | 32-bit |         |       |           |
@@ -52,7 +52,7 @@ This section describes the main components of the plugin and how they interface.
 ### Block Diagram
 ![BACnet Plugin Block Diagram](assets/bacnet-bd-transparent.png)
 
-The BACnet Plugin introduces several new abilities to the user once installed on the CALDERA server. The abilities execute on the agent and can target any device that supports the BACnet protocol via IP or Ethernet.
+The BACnet Plugin introduces several new abilities to the user once installed on the Caldera server. The abilities execute on the agent and can target any device that supports the BACnet protocol via IP or Ethernet.
 
 Compatible targets include, but are not limited to: BACnet/IP-attached PLCs, BACnet Ethernet-attached PLCs, and Engineering Workstations or Systems that can reach PLCs attached via BACnet/IP or BACnet Ethernet.
 
@@ -81,11 +81,11 @@ This section describes how to initially deploy and execute the abilities present
 
 ### Deployment
 1. Identify systems likely to be on the same network / subnet as BACnet devices.
-2. Utilize Lateral Movement or other means to get a CALDERA agent deployed onto one or more of these systems.
+2. Utilize Lateral Movement or other means to get a Caldera agent deployed onto one or more of these systems.
 3. Run the ability **BACnet Who-Is** against a system to scan for BACnet devices accessible to that system.
 4. Run any of the other BACnet abilities in order to locate objects/properties, identify program state, or to impact control.
 
-*Reference the CALDERA training plugin for a step-by-step tutorial on how to deploy an agent and run abilities via a campaign.*
+*Reference the Caldera training plugin for a step-by-step tutorial on how to deploy an agent and run abilities via a campaign.*
 
 #### BACnet Sources and Facts
 
@@ -244,4 +244,4 @@ The binaries for this plugin are produced by compiling [BACnet Stack](https://gi
 
 ASHRAE® and BACnet® are registered trademarks of the American Society of Heating, Refrigerating and Air-Conditioning Engineers, Inc. 180 Technology Parkway NW, Peachtree Corners, Georgia 30092 US.
 
-This CALDERA plugin is named "BACnet" as that is a short identifier of its purpose / scope. This plugin is not produced-by ASHRAE.
+This Caldera plugin is named "BACnet" as that is a short identifier of its purpose / scope. This plugin is not produced-by ASHRAE.
