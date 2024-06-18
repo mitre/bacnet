@@ -13,7 +13,7 @@ To run Caldera along with BACnet plugin:
 3. Enable the bacnet plugin by adding `- bacnet` to the list of enabled plugins in `conf/local.yml` or `conf/default.yml` (if running Caldera in insecure mode)
 
 ### Version
-This plugin is compatible with the current version of Caldera v4.1.0 as of 26 Jan 2023. This can be checked out using the following method:
+This plugin is compatible with Caldera v4.2.0 and v5.0.0. The latest version of Caldera can be checked out using the following method:
 ```
 git clone --recursive https://github.com/mitre/caldera.git
 ```
