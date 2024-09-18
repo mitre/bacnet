@@ -1,23 +1,23 @@
-<div x-data="alpineBACnet()" x-init="initPage()">
+<div>
     <div>
-        <h2 x-text="name"></h2>
-        <p x-text="description"></p>
+        <h2>{{ name }} Protocol Plugin</h2>
+        <p>{{ description }}</p>
     </div>
     <hr>
     <h3>Documentation</h3>
-    <span>
-        Get started by referencing the <a href="/docs/plugins/bacnet/bacnet.html" target="_blank">BACnet Plugin Fieldmanual</a>.
-    </span>
+    <p>
+        Get started by referencing the
+        <a href="/docs/plugins/{{ name.lower() }}/{{ name.lower() }}.html" target="_blank">{{ name }} Plugin Fieldmanual</a>.
+    </p>
     <h3>Abilities</h3>
     <div class="columns abilities is-multiline">
-
         {% for a in abilities %}
             <div class="column is-one-quarter p-1 m-0">
-                <div id="otbox" class="box p-3 m-1">
+                <div class="box otbox p-3 m-1" @mouseleave="handleBoxExit">
                     <div class="abilitytags">
                         <span class="tag tactic is-dark m-0 mb-1">{{a.tactic}}</span><br>
                     </div>
-                    <div id="inner_otbox">
+                    <div class="inner_otbox">
                         <p>
                             <span class="has-text-weight-bold">{{a.name}}</span>
                             ({{a.technique_id}}: {{a.technique_name}})
@@ -29,37 +29,29 @@
         {% endfor %}
     </div>
     <h3>Adversaries</h3>
-    <span>There are no custom BACnet adversaries at this time.</span>
+    <p>There are no custom {{ name }} adversaries at this time.</p>
 </div>
 
 <script>
 
-function alpineBACnet() {
-    return {
-
-        name: '{{ name }}',
-        description: '{{ description }}',
-
-        initPage() {
-            console.log('initpage complete.')
-        }
-    };
+function handleBoxExit(e){
+    e.target.scrollTo({top: 0, behavior: 'smooth'});
 }
 </script>
 
 <style>
-    #inner_otbox{
-        margin-right: 15px;
-    }
-    #otbox{
-        height: 200px;
-        background-color: var(--primary-color-translucent);
-        overflow-y: hidden;
-    }
-    #otbox:hover{
-        outline: 3px;
-        outline-color: var(--primary-color);
-        outline-style: solid;
-        overflow-y: scroll;
-    }
+.otbox{
+    height: 200px;
+    background-color: var(--primary-color-translucent);
+    overflow-y: hidden;
+}
+.otbox:hover{
+    outline: 3px;
+    outline-color: var(--primary-color);
+    outline-style: solid;
+    overflow-y: scroll;
+}
+.inner_otbox{
+    margin-right: 15px;
+}
 </style>
