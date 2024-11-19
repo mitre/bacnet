@@ -2,7 +2,8 @@
 
 - id: 1811b7f2-3a73-11eb-adc1-0242ac120002
   name: BACnet EPICS Report
-  description: |
+  plugin: bacnet
+  description: >-
     Generates an EPICS report - which provides services supported, the object list, and properties of those objects.
   tactic: collection
   technique:

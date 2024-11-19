@@ -1,0 +1,30 @@
+---
+
+- id: d6aca3d5-3a10-4e28-9f88-43cc0c8f2b40
+  name: BACnet Get Event Information 
+  plugin: bacnet
+  description: >-
+    BACnet Service:   GetEventInformation
+    Service Category: Alarm and Event
+
+    The GetEventInformation service is used by a client BACnet-user to get a summary of all active state events on the target device.
+  tactic: collection
+  technique:
+    attack_id: T0801
+    name: Monitor Process State
+  repeatable: True
+  platforms:
+    linux:
+      sh:
+        timeout: 360
+        command: |
+          ./bacge #{bacnet.device.instance}
+        payloads:
+          - bacge
+    windows:
+      psh, cmd:
+        timeout: 360
+        command: |
+          .\bacge.exe #{bacnet.device.instance}
+        payloads:
+          - bacge.exe

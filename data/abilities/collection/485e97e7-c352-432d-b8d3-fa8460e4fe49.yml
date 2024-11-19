@@ -1,0 +1,36 @@
+---
+
+- id: 485e97e7-c352-432d-b8d3-fa8460e4fe49
+  name: BACnet Device Collection - Basic
+  plugin: bacnet
+  description: >-
+    BACnet Service:   ReadPropertyMultiple
+    Service Category: Object Access 
+
+    This ability leverages the ReadPropertyMultiple service to request the values of a set of specific, pre-defined
+    BACnet Device Object properties:
+    * 77: object_name
+    * 121: vendor_name
+    * 70: model_name
+    * 28: description
+    * 76: obj_list
+  tactic: collection
+  technique:
+    attack_id: T0861
+    name: Point & Tag Identification
+  repeatable: True
+  platforms:
+    linux:
+      sh:
+        timeout: 360
+        command: |
+          ./bacrpm #{bacnet.device.instance} device #{bacnet.device.instance} 77,121,70,28,76
+        payloads:
+          - bacrpm
+    windows:
+      psh, cmd:
+        timeout: 360
+        command: |
+          .\bacrpm.exe #{bacnet.device.instance} device #{bacnet.device.instance} 77,121,70,28,76
+        payloads:
+          - bacrpm.exe

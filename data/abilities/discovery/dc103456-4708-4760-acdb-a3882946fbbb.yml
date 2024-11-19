@@ -1,0 +1,31 @@
+---
+
+- id: dc103456-4708-4760-acdb-a3882946fbbb
+  name: BACnet Who-Has
+  plugin: bacnet
+  description: >-
+    BACnet Service:   WhoHas
+    Service Category: Remote Device Management
+
+    The Who-Has service is used by a sending BACnet-user to determine the Device object identifier, the network address, or both, 
+    of BACnet devices that contain a given object name or object identifier.
+  tactic: discovery
+  technique:
+    attack_id: T0888
+    name: Remote System Information Discovery
+  repeatable: True
+  platforms:
+    linux:
+      sh:
+        timeout: 360
+        command: |
+          ./bacwh #{bacnet.device.min_instance} #{bacnet.device.max_instance} #{bacnet.obj.name}
+        payloads:
+          - bacwh
+    windows:
+      psh, cmd:
+        timeout: 360
+        command: |
+          .\bacwh.exe #{bacnet.device.min_instance} #{bacnet.device.max_instance} #{bacnet.obj.name}
+        payloads:
+          - bacwh.exe 

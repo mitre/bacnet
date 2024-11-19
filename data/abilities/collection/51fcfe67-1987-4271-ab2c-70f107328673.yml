@@ -1,0 +1,30 @@
+---
+
+- id: 51fcfe67-1987-4271-ab2c-70f107328673
+  name: BACnet Subscribe COV
+  plugin: bacnet
+  description: >-
+    BACnet Service:   Subscribe COV (Change of Value)
+    Service Category: Alarm and Event 
+
+    The SubscribeCOV service is used by a client to subscribe to notification changes for the properties of a given object.
+  tactic: collection
+  technique:
+    attack_id: T0802
+    name: Automated Collection
+  repeatable: True
+  platforms:
+    linux:
+      sh:
+        timeout: 360
+        command: |
+          ./bacscov #{bacnet.device.instance} #{bacnet.obj.type} #{bacnet.obj.instance} #{bacnet.scov.process_id}  #{bacnet.scov.confirm_status}
+        payloads:
+          - bacscov
+    windows:
+      psh, cmd:
+        timeout: 360
+        command: |
+          .\bacscov.exe #{bacnet.device.instance} #{bacnet.obj.type} #{bacnet.obj.instance} #{bacnet.scov.process_id}  #{bacnet.scov.confirm_status}
+        payloads:
+          - bacscov.exe

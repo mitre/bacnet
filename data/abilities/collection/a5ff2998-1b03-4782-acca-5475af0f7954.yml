@@ -1,0 +1,33 @@
+---
+
+- id: a5ff2998-1b03-4782-acca-5475af0f7954
+  name: BACnet Read Property Multiple
+  plugin: bacnet
+  description: >-
+    BACnet Service:   ReadPropertyMultiple
+    Service Category: Object Access 
+
+    The ReadPropertyMultiple service is used by a client BACnet-user to request the values of one or more specified properties of one ore more BACnet Objects.
+    For example, a single property for a single object, a list of properties for a single object, or even any number of properties for any number of objects. 
+
+    For #{bacnet.obj.property} the value "8" can be provided to read the ALL Property if "device" is provided for #{bacnet.obj.type}. 
+  tactic: collection
+  technique:
+    attack_id: T0861
+    name: Point & Tag Identification
+  repeatable: True
+  platforms:
+    linux:
+      sh:
+        timeout: 360
+        command: |
+          ./bacrpm #{bacnet.device.instance} #{bacnet.obj.type} #{bacnet.obj.instance} #{bacnet.obj.property}
+        payloads:
+          - bacrpm
+    windows:
+      psh, cmd:
+        timeout: 360
+        command: |
+          .\bacrpm.exe #{bacnet.device.instance} #{bacnet.obj.type} #{bacnet.obj.instance} #{bacnet.obj.property}
+        payloads:
+          - bacrpm.exe

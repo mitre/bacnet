@@ -2,7 +2,11 @@
 
 - id: 1a2faf5a-4601-11eb-b378-0242ac130002
   name: BACnet Write Property
-  description: |
+  plugin: bacnet
+  description: >-
+    BACnet Service:   WriteProperty
+    Service Category: Object Access
+
     The WriteProperty service is used by a client BACnet-user to modify the value of a single specified property of a BACnet object.
   tactic: impact
   technique:

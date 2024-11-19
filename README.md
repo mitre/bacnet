@@ -1,7 +1,6 @@
-# Caldera for OT plugin: BACnet
+# MITRE Caldera™ for OT plugin: BACnet
 
-A [Caldera for OT](https://github.com/mitre/caldera-ot) plugin supplying [Caldera](https://github.com/mitre/caldera) with BACnet protocol TTPs.
-This is part of a series of plugins that provide added threat emulation capability for Operational Technology (OT) environments.
+A [MITRE Caldera™ for OT](https://github.com/mitre/caldera-ot) plugin supplying [Caldera](https://github.com/mitre/caldera) with BACnet protocol TTPs mapped to MITRE ATT&CK® for ICS [v14](https://attack.mitre.org/resources/updates/updates-october-2023/). This is part of a series of plugins that provide added threat emulation capability for Operational Technology (OT) environments.
 
 Full BACnet plugin [documentation](docs/bacnet.md) can be viewed as part of fieldmanual, once the Caldera server is running.
 
@@ -15,8 +14,9 @@ To run Caldera along with BACnet plugin:
 ### Version
 This plugin is compatible with Caldera v4.2.0 and v5.0.0. The latest version of Caldera can be checked out using the following method:
 ```
-git clone --recursive https://github.com/mitre/caldera.git
+git clone https://github.com/mitre/caldera.git --recursive
 ```
+
 ### Tested OS Versions for Plugin Payload(s)
 
 Building of the BACnet plugin payloads has been tested as described [here](/src/README.md#reproducing-builds). See the corresponding plugin payload source code for further build information.

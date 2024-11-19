@@ -2,7 +2,11 @@
 
 - id: b93bd80e-3a70-11eb-adc1-0242ac120002
   name: BACnet Who-Is
-  description: |
+  plugin: bacnet
+  description: >-
+    BACnet Service:   WhoIs
+    Service Category: Remote Device Management
+
     The Who-Is service is used by a sending BACnet-user to determine the Device object identifier, the network address, or both, of other BACnet devices that share the same internetwork.
   tactic: discovery
   technique:

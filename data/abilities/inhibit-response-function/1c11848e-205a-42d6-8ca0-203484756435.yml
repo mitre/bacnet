@@ -1,0 +1,37 @@
+---
+
+- id: 1c11848e-205a-42d6-8ca0-203484756435
+  name: BACnet Reinitialize Device - Warm Start
+  plugin: bacnet
+  description: >-
+    BACnet Service:   Reinitialize Device
+    Service Category: Remote Device Management
+
+    The ReinitializeDevice service is used by a client BACnet-user to instruct a remote device to do one of the following behaviors:
+    reboot (cold start), reset to another predefined initial state (warm start), activate network port object changes,
+    or to control the backup or restore procedures. 
+
+    Possible state values:
+      0=coldstart
+      1=warmstart
+      ...
+  tactic: inhibit-response-function
+  technique:
+    attack_id: T0816
+    name: Device Restart/Shutdown
+  repeatable: True
+  platforms:
+    linux:
+      sh:
+        timeout: 360
+        command: |
+          ./bacrd #{bacnet.device.instance} 1
+        payloads:
+          - bacrd
+    windows:
+      psh, cmd:
+        timeout: 360
+        command: |
+          .\bacrd.exe #{bacnet.device.instance} 1
+        payloads:
+          - bacrd.exe

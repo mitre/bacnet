@@ -1,0 +1,37 @@
+---
+
+- id: bd13ac81-b932-463d-95aa-a22aeefbc9ac
+  name: BACnet Object Collection - Basic
+  plugin: bacnet
+  description: >-
+    BACnet Service:   ReadPropertyMultiple
+    Service Category: Object Access 
+
+    This ability leverages the ReadPropertyMultiple service to request the values of specific 
+    Required properties of a BACnet object.
+
+    * 77: object_name
+    * 28: description
+    * 85: present_value
+    * 117: units
+  tactic: collection
+  technique:
+    attack_id: T0861
+    name: Point & Tag Identification
+  repeatable: True
+  platforms:
+    linux:
+      sh:
+        timeout: 360
+        command: |
+          ./bacrpm #{bacnet.device.instance} #{bacnet.object.type} #{bacnet.object.instance} 77,28,85,117
+        payloads:
+          - bacrpm
+
+    windows:
+      psh, cmd:
+        timeout: 360
+        command: |
+          .\bacrpm.exe #{bacnet.device.instance} #{bacnet.object.type} #{bacnet.object.instance} 77,28,85,117
+        payloads:
+          - bacrpm.exe

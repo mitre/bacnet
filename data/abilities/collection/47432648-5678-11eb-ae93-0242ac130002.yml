@@ -2,7 +2,11 @@
 
 - id: 47432648-5678-11eb-ae93-0242ac130002
   name: BACnet Read Property
-  description: |
+  plugin: bacnet
+  description: >-
+    BACnet Service:   ReadProperty
+    Service Category: Object Access 
+
     The ReadProperty service is used by a client BACnet-user to request the value of one property of one BACnet Object.
   tactic: collection
   technique:

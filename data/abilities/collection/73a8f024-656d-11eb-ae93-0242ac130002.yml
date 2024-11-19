@@ -2,7 +2,11 @@
 
 - id: 73a8f024-656d-11eb-ae93-0242ac130002
   name: BACnet Atomic Read File
-  description: |
+  plugin: bacnet
+  description: >-
+    BACnet Service:   AtomicReadFile
+    Service Category: File Access 
+
     The AtomicReadFile Service is used by a client BACnet-user to perform an open-read-close operation on the contents of the specified file. The file is saved locally.
   tactic: collection
   technique:
