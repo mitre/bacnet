@@ -376,7 +376,7 @@ A few additional references are also linked to in the [Abilities](#abilities) ov
 
 
 ## Source Code
-The binaries for this plugin are produced by compiling [BACnet Stack](https://github.com/bacnet-stack/bacnet-stack/tree/bacnet-stack-1.0) 1.0. The functionality of readprop and writeprop were modified - the modified variants can be found inside this plugin's [src directory](/src/).
+The binaries for this plugin are produced by compiling [BACnet Stack](https://github.com/bacnet-stack/bacnet-stack/tree/bacnet-stack-1.0) 1.0. The functionality of readprop and writeprop were modified - the modified variants can be found inside this plugin's `src/` directory.
 
 ## Copyright Notice
 
