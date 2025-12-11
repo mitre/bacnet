@@ -21,6 +21,9 @@
           ./bacwi
         payloads:
           - bacwi
+        parsers:
+          plugins.bacnet.app.parsers.data_set:
+            - source: bacnet.device.instance
     windows:
       psh, cmd:
         timeout: 360
@@ -28,3 +31,6 @@
           .\bacwi.exe
         payloads:
           - bacwi.exe
+        parsers:
+          plugins.bacnet.app.parsers.data_set:
+            - source: bacnet.device.instance
