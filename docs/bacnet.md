@@ -440,13 +440,13 @@ in many cases.
 You can find the full list of codes and their string equivalents in the BACnet
 Stack source code:
 
-- `#{bacnet.obj.type} facts: 
+- `#{bacnet.obj.type}` facts: 
   - [Object Type Codes](https://github.com/bacnet-stack/bacnet-stack/blob/cfb82a937fe64b9c7d8eae1f7e723879bb4c9305/src/bacnet/bacenum.h#L1179)
   - [Object Type Strings](https://github.com/bacnet-stack/bacnet-stack/blob/df335343f3cc8c503cb3edb5d49b1a028887f653/src/bacnet/bactext.c#L196)
-- `#{bacnet.obj.property} facts: 
+- `#{bacnet.obj.property}` facts: 
   - [Object Property Codes](https://github.com/bacnet-stack/bacnet-stack/blob/cfb82a937fe64b9c7d8eae1f7e723879bb4c9305/src/bacnet/bacenum.h#L27)
   - [Object Property Strings](https://github.com/bacnet-stack/bacnet-stack/blob/df335343f3cc8c503cb3edb5d49b1a028887f653/src/bacnet/bactext.c#L380)
-- `#{bacnet.write.tag} facts: 
+- `#{bacnet.write.tag}` facts: 
   - [Application Tag Codes](https://github.com/bacnet-stack/bacnet-stack/blob/cfb82a937fe64b9c7d8eae1f7e723879bb4c9305/src/bacnet/bacenum.h#L1291)
   - [Application Tag Strings](https://github.com/bacnet-stack/bacnet-stack/blob/df335343f3cc8c503cb3edb5d49b1a028887f653/src/bacnet/bactext.c#L117)
 
