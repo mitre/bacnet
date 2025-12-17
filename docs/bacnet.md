@@ -95,7 +95,7 @@ This section describes how to initially deploy and execute the abilities present
 1. Identify the target system you would like to communicate with via the BACnet protocol.
 2. Identify a viable host for the Caldera agent that will be sending BACnet
    messages to the target system. A viable host will have a network connect to the target
-   system and have be [compatible](#compatibility) with the payloads in this plugin.
+   system and be [compatible](#compatibility) with the payloads in this plugin.
 3. Deploy the Caldera agent to the viable host.
 4. Run a combination of the BACnet plugin abilities to achieve the desired effect. 
 
@@ -197,7 +197,7 @@ __Facts:__
 | Name | Description | Type |
 |:-----|:------------|:----:|
 | `bacnet.device.instance` | Device instance (also accepts IP:Port address of device) | int |
-| `bacnet.obj.type` | Type of the [object](#objects) to be read | int |
+| `bacnet.obj.type` | Type of the [object](#objects) to be read | int or string |
 | `bacnet.obj.instance` | The [instance number](#objects) of the object-type specified | int |
 | `bacnet.obj.property` | The [property](#properties) of the object to be read | int |
 | `bacnet.read.index` | How to handle reading arrays | int |
@@ -209,9 +209,18 @@ Read Index Values:
 - `1..N`: Gets the property value at index N if it is an array type
 
 __Examples:__  
+Read the PRESENT VALUE (property 85) of instance 7 of the ANALOG INPUTS (object
+type 0) on device instance 100101. Read the full property (read index -2).
 ```sh
-./bacrp 100101 8 100101 76 -2
+./bacrp 100101 0 7 85 -2
 ```
+
+Read the OBJECT LIST (property 76) of instance 100101 of the DEVICES (object
+type 8) on device instance 100101. Read the full property (read index -2).
+```sh
+./bacrp 100101 device 100101 76 -2
+```
+
 
 #### Read Property Multiple
 The ReadPropertyMultiple service is used by a client BACnet-user to request the
@@ -220,7 +229,7 @@ example, a single property for a single object, a list of properties for a
 single object, or even any number of properties for any number of objects.
 
 Read Property Multiple is similar to Read Property, but allows multiple
-properties to be provided, in the form of a comma separate list (e.g., "1,2,3").
+properties to be provided, in the form of a comma separated list (e.g., "1,2,3").
 
 __Ability Command:__
 ```caldera
@@ -231,7 +240,7 @@ __Facts:__
 | Name | Description | Type |
 |:-----|:------------|:----:|
 | `bacnet.device.instance` | Device instance (also accepts IP:Port address of device) | int |
-| `bacnet.obj.type` | Type of the [object](#objects) to be read | int |
+| `bacnet.obj.type` | Type of the [object](#objects) to be read | int or string |
 | `bacnet.obj.instance` | The [instance number](#objects) of the object-type specified | int |
 | `bacnet.obj.property` | The [properties](#properties) of the object to be read | comma separated list of int |
 
@@ -242,8 +251,8 @@ __Examples:__
 
 BACnet Device Collection Example:
 
-Read the Object Name (77), Vendor Name (121), Model Name (70), Description (28),
-and Object List (76), of the Device Object 100101.
+Read the OBJECT NAME (77), VENDOR NAME (121), MODEL NAME (70), DESCRIPTION (28),
+and OBJECT LIST (76) of instance 100101 of the DEVICES for Device Instance 100101.
 ```sh
 ./bacrpm 100101 device 100101 77,121,70,28,76
 ```
@@ -262,7 +271,7 @@ __Facts:__
 | Name | Description | Type |
 |:-----|:------------|:----:|
 | `bacnet.device.instance` | Device instance  (also accepts IP:Port address of device) | int |
-| `bacnet.obj.type` | Type of the [object](#objects) to subscribe to | int |
+| `bacnet.obj.type` | Type of the [object](#objects) to subscribe to | int or string |
 | `bacnet.obj.instance` | The [instance number](#objects) of the object-type specified | int |
 | `bacnet.scov.process_id` | A process identifier for the COV subscription | int |
 | `bacnet.scov.confirm_status` | A flag to subscribe with confirmed notifications | "confirmed" or "unconfirmed" |
@@ -285,17 +294,27 @@ __Facts:__
 | Name | Description | Type |
 |:-----|:------------|:----:|
 | `bacnet.device.instance` | Device instance (also accepts IP:Port address of device) | int |
-| `bacnet.obj.type` | Type of the [object](#objects) to be written to | int |
+| `bacnet.obj.type` | Type of the [object](#objects) to be written to | int or string |
 | `bacnet.obj.instance` | The [instance number](#objects) of the object-type specified | int |
 | `bacnet.obj.property` | The [property](#properties) of the object to be written to | int |
 | `bacnet.write.priority` | The precedence of the write (lower is higher) | int |
 | `bacnet.write.index` | `-1` write the entire property, `1..N` write to the specified index | int |
-| `bacnet.write.tag` | The [type of value](#bacnet-numeric-codes) to be written | int |
-| `bacnet.write.value` | The write value itself | int |
+| `bacnet.write.tag` | The [type of value](#bacnet-fact-values) to be written | int |
+| `bacnet.write.value` | The write value itself | string |
+
+The value (`#{bacnet.write.value}`) is an ASCII representation of some type of
+data that you wish to write.  It is encoded using the tag information provided
+(`#{bacnet.write.tag}`). For example, if you were writing a REAL value of
+100.0, you would use a `#{bacnet.write.value}` of `'100.0'` and a 
+`#{bacnet.write.tag}` of `4`.
 
 __Examples:__  
+
+Write a BOOLEAN value of FALSE to property 85 (PRESENT_VALUE) of instance 7 of
+object 4 (BINARY_OUTPUT) on device instance 100101. Write the full property with 
+a precedence of 5.
 ```sh
-./bacwp 100101 4 7 85 5 -1 9 0
+./bacwp 100101 4 7 85 5 -1 1 0
 ```
 
 #### Atomic Read File
@@ -374,12 +393,12 @@ An object is identified by its **object type** plus an **object instance**:
 
 - **Object type**: the kind of thing it is  
   Examples: `analog-input`, `analog-output`, `binary-input`, `device`, `schedule`, etc.  
-  In the BACnet specification (and this plugin), these types are represented as 
-  [numeric codes](#bacnet-numeric-codes).
+  For a list of object types see the [BACnet Fact Values](#bacnet-fact-values) section.
 
 - **Object instance**: which one of that type it is  
   Each object type on a device has instance numbers (0, 1, 2, …) that uniquely
-  identify individual objects of that type on that device.
+  identify individual objects of that type on that device. Note that the object
+  instance is always an integer value.
 
 Together, `(object type, object instance)` uniquely identify an object within a device.
 
@@ -394,22 +413,42 @@ object or its current state. For example:
 - `units` – engineering units (e.g., degrees Celsius)
 - `status-flags` – alarm/fault/overridden indicators
 
-Like object types, property names are also represented as [numeric codes](#bacnet-numeric-codes).
+For a list of property types see the [BACnet Fact Values](#bacnet-fact-values) section.
 
 Some property values are stored as arrays. In these cases, the `#{bacnet.read.index}` or `#{bacnet.write.index}`
 facts are used to identify the **index** in that array to read or write.
 
-### BACnet Numeric Codes
+### BACnet Fact Values
 
-As described above, BACnet object types and properties are defined by numeric
-codes in the BACnet specification. This plugin relies on those same codes to be
-supplied to abilities (via facts) to specify the desired action. You can find
-the full list of codes and their corresponding names in the BACnet stack source
-code:
+As described above, uniquely specifying a data object in BACnet requires specifying:
+- the Object Type
+- the Instance of that Object
+- the Property within that Object
+- and, if the property contains an array, the Index within the Property
 
-- `#{bacnet.obj.type} facts: [Object Types](https://github.com/bacnet-stack/bacnet-stack/blob/cfb82a937fe64b9c7d8eae1f7e723879bb4c9305/src/bacnet/bacenum.h#L1179)
-- `#{bacnet.obj.property} facts: [Object Properties](https://github.com/bacnet-stack/bacnet-stack/blob/cfb82a937fe64b9c7d8eae1f7e723879bb4c9305/src/bacnet/bacenum.h#L27)
-- `#{bacnet.write.tag} facts: [Application Tags](https://github.com/bacnet-stack/bacnet-stack/blob/cfb82a937fe64b9c7d8eae1f7e723879bb4c9305/src/bacnet/bacenum.h#L1291)
+Additionally, for a [Write Property](#write-property) operation, a *write tag*
+(`#{bacnet.write.tag}`) must be supplied to indicate how to interpret the value
+passed to the ability (`#{bacnet.write.value}`).
+
+The object instance (`#{bacnet.obj.instance}`) is always an integer. The other
+facts can be provided either as a numeric code or as a string. The numeric codes
+are defined by the BACnet specification and are consistent across BACnet
+implementations. BACnet Stack (the library underlying this plugin) also defines
+human-readable string equivalents for these codes, which may be more convenient
+in many cases.
+
+You can find the full list of codes and their string equivalents in the BACnet
+Stack source code:
+
+- `#{bacnet.obj.type} facts: 
+  - [Object Type Codes](https://github.com/bacnet-stack/bacnet-stack/blob/cfb82a937fe64b9c7d8eae1f7e723879bb4c9305/src/bacnet/bacenum.h#L1179)
+  - [Object Type Strings](https://github.com/bacnet-stack/bacnet-stack/blob/df335343f3cc8c503cb3edb5d49b1a028887f653/src/bacnet/bactext.c#L196)
+- `#{bacnet.obj.property} facts: 
+  - [Object Property Codes](https://github.com/bacnet-stack/bacnet-stack/blob/cfb82a937fe64b9c7d8eae1f7e723879bb4c9305/src/bacnet/bacenum.h#L27)
+  - [Object Property Strings](https://github.com/bacnet-stack/bacnet-stack/blob/df335343f3cc8c503cb3edb5d49b1a028887f653/src/bacnet/bactext.c#L380)
+- `#{bacnet.write.tag} facts: 
+  - [Application Tag Codes](https://github.com/bacnet-stack/bacnet-stack/blob/cfb82a937fe64b9c7d8eae1f7e723879bb4c9305/src/bacnet/bacenum.h#L1291)
+  - [Application Tag Strings](https://github.com/bacnet-stack/bacnet-stack/blob/df335343f3cc8c503cb3edb5d49b1a028887f653/src/bacnet/bactext.c#L117)
 
 
 ### Additional Resources:
