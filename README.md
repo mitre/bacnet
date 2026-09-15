@@ -31,3 +31,24 @@ Testing of the binaries has occured on:
  - Use "Add Potential Link" to run a specific ability from this plugin. You can enter the fact values manually, or use the ones from your fact source.
 
  Sources contains a small [example fact set](/data/sources/ddc9cb50-74b7-4f32-9ed1-39bb0a58c954.yml) and the fieldmanual documentation contains a reference section on [BACnet sources.](/docs/bacnet.md#bacnet-sources-and-facts)
+
+## Virtual OT Simulators
+
+To help you test the BACnet plugin without any additional hardware requirements,
+MITRE provides open-source simulators that act as software targets.
+
+### [Aloha Water Treatment](https://github.com/mitre/aloha-water-treatment)
+
+Aloha Water Treatment is a simulated water treatment plant with Modbus and
+BACnet process control, letting you test the BACnet plugin without physical
+hardware.
+
+To get started, follow the instructions [here](https://github.com/mitre/aloha-water-treatment).
+
+### [HVACSim](https://github.com/mitre/hvac-sim)
+
+HVACSim is a simulated HVAC control system that mimics the behavior of a
+real-world BACnet device, letting you test the BACnet plugin without physical
+hardware.
+
+To get started, follow the instructions [here](https://github.com/mitre/hvac-sim).
