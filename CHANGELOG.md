@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2026-11-11
+
+### Added
+
+- Github Action to build payloads
+
+### Changed
+
+- Payloads rebuilt by the new Github Action
+- README links to the MITRE simulators
+
 ## [1.2.0] - 2025-12-17
 
 ### Added
@@ -30,7 +41,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial stable version of the BACnet plugin, part of 
   [MITRE Caldera™ for OT](https://github.com/mitre/caldera-ot).
 
-[unreleased]: https://github.com/mitre/modbus/compare/v1.2.0...HEAD
-[1.2.0]: https://github.com/mitre/modbus/compare/v1.1.0...v1.2.0
-[1.1.0]: https://github.com/mitre/modbus/compare/v1.0.0...v1.1.0
-[1.0.0]: https://github.com/mitre/modbus/releases/tag/v1.0.0
+[unreleased]: https://github.com/mitre/bacnet/compare/v1.3.0...HEAD
+[1.3.0]: https://github.com/mitre/bacnet/compare/v1.2.0...v1.3.0
+[1.2.0]: https://github.com/mitre/bacnet/compare/v1.1.0...v1.2.0
+[1.1.0]: https://github.com/mitre/bacnet/compare/v1.0.0...v1.1.0
+[1.0.0]: https://github.com/mitre/bacnet/releases/tag/v1.0.0
