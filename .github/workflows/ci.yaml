@@ -1,0 +1,92 @@
+name: Build Payloads
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+env:
+  BACNET_STACK: bacnet-stack-1.0.0
+  PAYLOADS: bacarf bacawf bacepics bacge bacrd bacrp bacrpm bacscov bacwh bacwi bacwp
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    # Ubuntu 20.04 keeps the payloads runnable on glibc 2.15 and later.
+    container: ubuntu:20.04
+    steps:
+      - uses: actions/checkout@v6
+      - name: Install build tools
+        run: |
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential git
+      - name: Build payloads
+        run: |
+          git clone --depth 1 --branch $BACNET_STACK https://github.com/bacnet-stack/bacnet-stack.git /tmp/bacnet-stack
+          cp src/bacnet-stack/apps/readprop/main.c /tmp/bacnet-stack/apps/readprop/main.c
+          cp src/bacnet-stack/apps/writeprop/main.c /tmp/bacnet-stack/apps/writeprop/main.c
+          make -C /tmp/bacnet-stack all
+          mkdir -p out
+          for p in $PAYLOADS; do cp /tmp/bacnet-stack/bin/$p out/; done
+      - name: Upload payloads
+        uses: actions/upload-artifact@v4
+        with:
+          name: bacnet-linux
+          path: out/
+          retention-days: 1
+
+  build-windows:
+    runs-on: ubuntu-latest
+    container: ubuntu:20.04
+    steps:
+      - uses: actions/checkout@v6
+      - name: Install build tools
+        run: |
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential mingw-w64 git
+      - name: Build payloads
+        run: |
+          git clone --depth 1 --branch $BACNET_STACK https://github.com/bacnet-stack/bacnet-stack.git /tmp/bacnet-stack
+          cp src/bacnet-stack/apps/readprop/main.c /tmp/bacnet-stack/apps/readprop/main.c
+          cp src/bacnet-stack/apps/writeprop/main.c /tmp/bacnet-stack/apps/writeprop/main.c
+          make -C /tmp/bacnet-stack win32 CC=x86_64-w64-mingw32-gcc AR=x86_64-w64-mingw32-ar
+          mkdir -p out
+          for p in $PAYLOADS; do cp /tmp/bacnet-stack/bin/$p.exe out/; done
+      - name: Upload payloads
+        uses: actions/upload-artifact@v4
+        with:
+          name: bacnet-windows
+          path: out/
+          retention-days: 1
+
+  create-pr:
+    needs:
+      - build-linux
+      - build-windows
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Download payloads
+        uses: actions/download-artifact@v4
+        with:
+          pattern: bacnet-*
+          merge-multiple: true
+          path: payloads/
+
+      - name: Create PR
+        uses: peter-evans/create-pull-request@v6
+        with:
+          base: main
+          branch: ci/update-payloads
+          title: Update payloads
+          commit-message: "chore: update payloads"
+          body: Automated update of payloads.
+          add-paths: payloads
+          delete-branch: true
