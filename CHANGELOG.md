@@ -41,7 +41,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial stable version of the BACnet plugin, part of 
   [MITRE Caldera™ for OT](https://github.com/mitre/caldera-ot).
 
-[unreleased]: https://github.com/mitre/modbus/compare/v1.2.0...HEAD
-[1.2.0]: https://github.com/mitre/modbus/compare/v1.1.0...v1.2.0
-[1.1.0]: https://github.com/mitre/modbus/compare/v1.0.0...v1.1.0
-[1.0.0]: https://github.com/mitre/modbus/releases/tag/v1.0.0
+[unreleased]: https://github.com/mitre/bacnet/compare/v1.3.0...HEAD
+[1.3.0]: https://github.com/mitre/bacnet/compare/v1.2.0...v1.3.0
+[1.2.0]: https://github.com/mitre/bacnet/compare/v1.1.0...v1.2.0
+[1.1.0]: https://github.com/mitre/bacnet/compare/v1.0.0...v1.1.0
+[1.0.0]: https://github.com/mitre/bacnet/releases/tag/v1.0.0
